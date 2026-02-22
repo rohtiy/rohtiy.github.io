@@ -72,14 +72,14 @@
         .rupee-label { font-size: 12px; opacity: 0.9; }
 
         /* --- Standard Cards --- */
-        .card { background: var(--surface); padding: 15px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 12px; position: relative; }
+        .card { background: var(--surface); padding: 15px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 12px; position: relative; cursor: pointer;}
         
         /* --- List Items --- */
         .list-item { 
             background: var(--surface); padding: 15px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 12px;
-            display: flex; justify-content: space-between; align-items: center; transition: 0.2s;
+            display: flex; justify-content: space-between; align-items: center; transition: 0.2s; cursor: pointer;
         }
-        .list-item:active { transform: scale(0.98); background: #fafafa; }
+        .list-item:active, .card:active { transform: scale(0.98); background: #fafafa; }
         
         .item-left { display: flex; gap: 12px; align-items: center; }
         .icon-box { width: 45px; height: 45px; background: #e3f2fd; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--brand-dark); }
@@ -96,7 +96,7 @@
         .s-pending { color: #f57c00; }
         
         /* --- Tags & Badges --- */
-        .badge { padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; cursor: pointer; }
         .badge-outline { border: 1px solid #ddd; color: var(--text-light); }
         .badge-fill-green { background: #e8f5e9; color: var(--brand-secondary); }
         
@@ -111,14 +111,16 @@
             background: var(--whatsapp-green); color: white; border: none; width: 100%; padding: 12px; 
             border-radius: var(--radius); font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 8px;
             margin-top: 15px; font-size: 14px; cursor: pointer; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            transition: 0.2s;
         }
+        .wa-btn:active { transform: scale(0.96); }
 
         /* --- Nav Bar --- */
         .nav-bar {
             position: fixed; bottom: 0; left: 0; width: 100%; background: var(--surface); height: 70px;
             display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #eee; z-index: 999;
         }
-        .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #9e9e9e; font-size: 10px; font-weight: 500; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #9e9e9e; font-size: 10px; font-weight: 500; transition: 0.3s; }
         .nav-item.active { color: var(--brand-primary); }
         .nav-icon { font-size: 22px; margin-bottom: 2px; }
 
@@ -128,7 +130,15 @@
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Back Button */
-        .back-nav { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; margin-bottom: 15px; cursor: pointer; color: var(--brand-dark); }
+        .back-nav { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; margin-bottom: 15px; cursor: pointer; color: var(--brand-dark); transition: 0.2s; }
+        .back-nav:active { opacity: 0.6; }
+
+        /* Quick Actions */
+        .quick-action-btn {
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+            flex: 1; padding: 10px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
@@ -153,12 +163,12 @@
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
-                <div class="card" style="margin:0; text-align: center;">
+                <div class="card" style="margin:0; text-align: center; cursor: default;">
                     <div style="font-size: 24px;">🏠</div>
                     <div style="font-weight: 700; font-size: 18px; margin-top: 5px;">92%</div>
                     <div style="font-size: 10px; color: var(--text-light);">Occupancy</div>
                 </div>
-                <div class="card" style="margin:0; text-align: center;">
+                <div class="card" style="margin:0; text-align: center; cursor: default;">
                     <div style="font-size: 24px;">⚡</div>
                     <div style="font-weight: 700; font-size: 18px; margin-top: 5px; color: #d32f2f;">₹ 12k</div>
                     <div style="font-size: 10px; color: var(--text-light);">Bijli Bills Due</div>
@@ -167,10 +177,10 @@
 
             <div class="section-title">
                 <span>Pending Kiraya (Rent)</span>
-                <span style="font-size: 12px; color: var(--brand-primary);">View All</span>
+                <span style="font-size: 12px; color: var(--brand-primary); cursor: pointer;" onclick="openPage('tenants')">View All</span>
             </div>
 
-            <div class="list-item" onclick="openPage('room-detail')">
+            <div class="list-item" onclick="openTenantProfile('t1')">
                 <div class="item-left">
                     <div class="icon-box" style="background: #ffebee; color: #d32f2f;">!</div>
                     <div class="text-box">
@@ -184,7 +194,7 @@
                 </div>
             </div>
 
-            <div class="list-item">
+            <div class="list-item" onclick="openTenantProfile('t3')">
                 <div class="item-left">
                     <div class="icon-box" style="background: #fff3e0; color: #f57c00;">🕒</div>
                     <div class="text-box">
@@ -218,7 +228,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" onclick="openPage('room-list')">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                     <h3 style="color: var(--brand-dark);">Krishna Heights</h3>
                     <span class="badge" style="background:#fff3e0; color: #ef6c00;">2 Vacant</span>
@@ -238,10 +248,10 @@
         <div id="screen-room-list" class="screen">
             <div class="back-nav" onclick="openPage('properties')">← Shanti Niketan</div>
             
-            <div style="display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 10px;">
-                <span class="badge" style="background: var(--brand-dark); color: white; padding: 8px 12px;">All Units</span>
-                <span class="badge" style="background: white; border: 1px solid #ddd; padding: 8px 12px;">Empty</span>
-                <span class="badge" style="background: white; border: 1px solid #ddd; padding: 8px 12px;">Defaulters</span>
+            <div style="display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 10px;" id="filter-badges">
+                <span class="badge filter-badge" style="background: var(--brand-dark); color: white; padding: 8px 12px;" onclick="applyFilter(this)">All Units</span>
+                <span class="badge filter-badge" style="background: white; border: 1px solid #ddd; padding: 8px 12px; color: var(--text-light);" onclick="applyFilter(this)">Empty</span>
+                <span class="badge filter-badge" style="background: white; border: 1px solid #ddd; padding: 8px 12px; color: var(--text-light);" onclick="applyFilter(this)">Defaulters</span>
             </div>
 
             <div class="list-item" onclick="openPage('room-detail')">
@@ -258,7 +268,7 @@
                 </div>
             </div>
 
-             <div class="list-item">
+             <div class="list-item" onclick="openTenantProfile('t2')">
                 <div class="item-left">
                     <div style="font-weight: 700; font-size: 16px; color: var(--brand-dark);">102</div>
                     <div class="text-box">
@@ -276,7 +286,7 @@
         <div id="screen-room-detail" class="screen">
             <div class="back-nav" onclick="openPage('room-list')">← Flat 101 Details</div>
 
-            <div class="card" style="border-top: 4px solid #d32f2f;">
+            <div class="card" style="border-top: 4px solid #d32f2f; cursor: default;">
                 <div class="section-title" style="margin-top:0;">
                     <span>Rent Status: Pending</span>
                     <span class="badge" style="background:#ffebee; color:#d32f2f;">Unpaid</span>
@@ -284,40 +294,26 @@
                 <div class="rupee-val" style="font-size: 24px; color: #d32f2f;">₹ 18,540</div>
                 <div style="font-size: 12px; color: var(--text-light);">Includes ₹540 Bijli Bill (Unit: 450-480)</div>
                 
-                <button class="wa-btn">
+                <button class="wa-btn" onclick="sendWhatsAppReminder('Suresh Sharma', '18,540')">
                     <span style="font-size: 18px;">💬</span> Send WhatsApp Reminder
                 </button>
             </div>
 
-            <div class="section-title">Tenant (Kirayedar) Details</div>
-            <div class="card">
-                <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 15px;">
-                    <div class="profile-pic" style="background: #e3f2fd; color: #1565c0;">S</div>
-                    <div>
-                        <div style="font-weight: 600;">Mr. Suresh Sharma</div>
-                        <div style="font-size: 11px; color: var(--text-light);">Since: Jan 2022</div>
+            <div class="section-title">Current Tenant</div>
+            <div class="card" onclick="openTenantProfile('t1')">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <div class="profile-pic" style="background: #e3f2fd; color: #1565c0;">S</div>
+                        <div>
+                            <div style="font-weight: 600;">Mr. Suresh Sharma</div>
+                            <div style="font-size: 11px; color: var(--text-light);">Tap to view profile ›</div>
+                        </div>
                     </div>
-                </div>
-                <div class="detail-row">
-                    <span class="label">Phone</span>
-                    <span class="value">+91 98765 43210</span>
-                </div>
-                <div class="detail-row">
-                    <span class="label">ID Proof</span>
-                    <span class="value">Aadhaar (XXXX-1234)</span>
-                </div>
-                <div class="detail-row">
-                    <span class="label">Police Verification</span>
-                    <span class="badge badge-fill-green">Verified</span>
-                </div>
-                <div class="detail-row">
-                    <span class="label">Occupants</span>
-                    <span class="value">4 People</span>
                 </div>
             </div>
 
             <div class="section-title">Maintenance & Claims</div>
-            <div class="card">
+            <div class="card" style="cursor: default;">
                 <div class="detail-row">
                     <span class="label">Security Deposit</span>
                     <span class="value">₹ 50,000</span>
@@ -328,52 +324,237 @@
                     <div style="font-size: 12px; font-weight: 600; margin-top: 4px;">Est. Cost: ₹ 300</div>
                 </div>
             </div>
+            <div style="height: 50px;"></div>
+        </div>
+
+        <div id="screen-tenants" class="screen">
+            <div class="section-title">All Tenants</div>
+            
+            <div class="list-item" onclick="openTenantProfile('t1')">
+                <div class="item-left">
+                    <div class="profile-pic" style="background: #e3f2fd; color: #1565c0; width: 45px; height: 45px;">S</div>
+                    <div class="text-box">
+                        <h4>Suresh Sharma</h4>
+                        <p>Flat 101, Shanti Niketan</p>
+                    </div>
+                </div>
+                <div class="price-tag">
+                    <div class="status s-due">Pending</div>
+                </div>
+            </div>
+
+            <div class="list-item" onclick="openTenantProfile('t2')">
+                <div class="item-left">
+                    <div class="profile-pic" style="background: #fff3e0; color: #ef6c00; width: 45px; height: 45px;">A</div>
+                    <div class="text-box">
+                        <h4>Amit Verma</h4>
+                        <p>Flat 102, Shanti Niketan</p>
+                    </div>
+                </div>
+                <div class="price-tag">
+                    <div class="status s-paid">Paid</div>
+                </div>
+            </div>
+            
+            <div class="list-item" onclick="openTenantProfile('t3')">
+                <div class="item-left">
+                    <div class="profile-pic" style="background: #e8f5e9; color: #2e7d32; width: 45px; height: 45px;">R</div>
+                    <div class="text-box">
+                        <h4>Rahul Singh</h4>
+                        <p>Bed 4, Krishna Heights</p>
+                    </div>
+                </div>
+                <div class="price-tag">
+                    <div class="status s-pending">Due Tmrw</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen-tenant-profile" class="screen">
+            <div class="back-nav" onclick="openPage('tenants')">← Back to Tenants</div>
+            
+            <div class="card" style="text-align: center; cursor: default;">
+                <div class="profile-pic" id="tp-pic" style="width: 70px; height: 70px; font-size: 28px; margin: 0 auto 10px auto;">S</div>
+                <h2 id="tp-name" style="color: var(--brand-dark);">Suresh Sharma</h2>
+                <p id="tp-room" style="color: var(--text-light); font-size: 13px;">Flat 101 • Shanti Niketan</p>
+                
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button class="quick-action-btn" style="background: #e8f5e9; color: var(--brand-secondary);" onclick="alert('Calling Tenant...')">
+                        <span style="font-size: 16px;">📞</span> Call
+                    </button>
+                    <button class="quick-action-btn" style="background: var(--whatsapp-green); color: white;" onclick="sendWhatsAppReminder(document.getElementById('tp-name').innerText, 'your due rent')">
+                        <span style="font-size: 16px;">💬</span> WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <div class="section-title">Rent Status</div>
+            <div class="card" id="tp-rent-card" style="cursor: default;">
+                </div>
+
+            <div class="section-title">KYC & Documents</div>
+            <div class="card" style="cursor: default;">
+                <div class="detail-row">
+                    <span class="label">Phone</span>
+                    <span class="value" id="tp-phone">+91 98765 43210</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Aadhaar Card</span>
+                    <span class="value" style="color: var(--brand-secondary);">Verified ✓</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Police Verification</span>
+                    <span class="value" style="color: var(--brand-secondary);">Submitted ✓</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Move-in Date</span>
+                    <span class="value" id="tp-date">12 Jan 2022</span>
+                </div>
+            </div>
             
             <div style="height: 50px;"></div>
+        </div>
+
+        <div id="screen-settings" class="screen">
+            <div class="section-title">Account Settings</div>
+            <div class="card">
+                <div class="detail-row" style="cursor: pointer;">
+                    <span class="label">Edit Profile</span>
+                    <span class="value">›</span>
+                </div>
+                <div class="detail-row" style="cursor: pointer;">
+                    <span class="label">Add Bank Details</span>
+                    <span class="value">›</span>
+                </div>
+                <div class="detail-row" style="cursor: pointer;">
+                    <span class="label">Notifications</span>
+                    <span class="value">On ›</span>
+                </div>
+            </div>
+            
+            <button class="wa-btn" style="background: white; color: #d32f2f; border: 1px solid #d32f2f; box-shadow: none;" onclick="alert('Logged out successfully!')">
+                Logout
+            </button>
         </div>
 
     </div>
 
     <nav class="nav-bar">
-        <a href="#" class="nav-item active" onclick="openPage('dashboard'); highlightNav(this)">
+        <a href="#" id="nav-dashboard" class="nav-item active" onclick="openPage('dashboard')">
             <span class="nav-icon">📊</span>
             <span>Home</span>
         </a>
-        <a href="#" class="nav-item" onclick="openPage('properties'); highlightNav(this)">
+        <a href="#" id="nav-properties" class="nav-item" onclick="openPage('properties')">
             <span class="nav-icon">🏢</span>
             <span>Properties</span>
         </a>
-        <a href="#" class="nav-item" onclick="highlightNav(this)">
+        <a href="#" id="nav-tenants" class="nav-item" onclick="openPage('tenants')">
             <span class="nav-icon">🤵</span>
             <span>Tenants</span>
         </a>
-        <a href="#" class="nav-item" onclick="highlightNav(this)">
+        <a href="#" id="nav-settings" class="nav-item" onclick="openPage('settings')">
             <span class="nav-icon">⚙️</span>
             <span>Settings</span>
         </a>
     </nav>
 
     <script>
+        // Database mock for the specific tenants
+        const tenantsData = {
+            't1': {
+                name: 'Suresh Sharma', initial: 'S', room: 'Flat 101 • Shanti Niketan', phone: '+91 98765 43210', date: '12 Jan 2022',
+                picBg: '#e3f2fd', picColor: '#1565c0',
+                rentHtml: `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #d32f2f; font-weight:700; font-size: 18px;">₹ 18,540 Due</span>
+                        <span class="badge" style="background:#ffebee; color:#d32f2f;">Pending</span>
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-light); margin-top: 5px;">Includes ₹540 Bijli Bill</div>
+                `
+            },
+            't2': {
+                name: 'Amit Verma', initial: 'A', room: 'Flat 102 • Shanti Niketan', phone: '+91 91234 56789', date: '05 Aug 2023',
+                picBg: '#fff3e0', picColor: '#ef6c00',
+                rentHtml: `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--brand-secondary); font-weight:700; font-size: 18px;">₹ 0 Due</span>
+                        <span class="badge badge-fill-green">Fully Paid</span>
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-light); margin-top: 5px;">Last payment: ₹16,000 on 1st Oct via UPI</div>
+                `
+            },
+            't3': {
+                name: 'Rahul Singh', initial: 'R', room: 'Bed 4 • Krishna Heights (PG)', phone: '+91 99887 77665', date: '01 Sep 2023',
+                picBg: '#e8f5e9', picColor: '#2e7d32',
+                rentHtml: `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #f57c00; font-weight:700; font-size: 18px;">₹ 8,500</span>
+                        <span class="badge" style="background: #fff3e0; color: #f57c00;">Due Tomorrow</span>
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-light); margin-top: 5px;">Monthly PG Rent (Meals Included)</div>
+                `
+            }
+        };
+
+        // Function to populate the profile and open it
+        function openTenantProfile(tenantId) {
+            const data = tenantsData[tenantId];
+            
+            // Inject data into the UI
+            document.getElementById('tp-name').innerText = data.name;
+            document.getElementById('tp-room').innerText = data.room;
+            document.getElementById('tp-phone').innerText = data.phone;
+            document.getElementById('tp-date').innerText = data.date;
+            document.getElementById('tp-rent-card').innerHTML = data.rentHtml;
+            
+            const pic = document.getElementById('tp-pic');
+            pic.innerText = data.initial;
+            pic.style.background = data.picBg;
+            pic.style.color = data.picColor;
+
+            // Route to the screen
+            openPage('tenant-profile');
+        }
+
+        // Standard Navigation logic
         function openPage(pageId) {
-            // Hide all pages
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
             });
-            // Show target page
             document.getElementById('screen-' + pageId).classList.add('active');
-            
-            // Scroll to top
             window.scrollTo(0, 0);
 
-            // Update nav state for main pages
-            if(pageId === 'dashboard' || pageId === 'properties') {
-                // Logic to update active bottom bar if needed
+            // Manage bottom nav highlighting
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if (pageId === 'dashboard') {
+                document.getElementById('nav-dashboard').classList.add('active');
+            } else if (pageId === 'properties' || pageId === 'room-list' || pageId === 'room-detail') {
+                document.getElementById('nav-properties').classList.add('active');
+            } else if (pageId === 'tenants' || pageId === 'tenant-profile') {
+                document.getElementById('nav-tenants').classList.add('active');
+            } else if (pageId === 'settings') {
+                document.getElementById('nav-settings').classList.add('active');
             }
         }
 
-        function highlightNav(element) {
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
+        // WhatsApp action
+        function sendWhatsAppReminder(name, amount) {
+            const phone = "919876543210"; // Placeholder
+            const message = `Namaste ${name} Ji! This is a gentle reminder from Shubh Estate that ${amount} is currently due. Please clear it at the earliest. Thank you!`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
+        }
+
+        // Badge filter actions
+        function applyFilter(element) {
+            document.querySelectorAll('.filter-badge').forEach(badge => {
+                badge.style.background = 'white';
+                badge.style.color = 'var(--text-light)';
+                badge.style.border = '1px solid #ddd';
+            });
+            element.style.background = 'var(--brand-dark)';
+            element.style.color = 'white';
+            element.style.border = '1px solid var(--brand-dark)';
         }
     </script>
 </body>
