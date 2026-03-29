@@ -32,6 +32,7 @@ function boundaryCheck() {
 function restartGame() {
   if(isGameOver) {
     isGameOver = false;
+    ballVelocity = { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) };      
     animate();
   }
 }
@@ -42,19 +43,31 @@ function onClickListner() {
 
 function moveLeft() {
    playerPosition.x = playerPosition.x - 60;
+   velocity.x = 0;
 }
 
 function moveRight() {
   playerPosition.x = playerPosition.x + 60;
+  velocity.x = 0;
 }
 
 function onKeyPressUpdate(event) {
-  if (event.key === "ArrowLeft") {
-    moveLeft();
-  } else if (event.key === "ArrowRight") {
-    moveRight();
+  switch (event.key) {
+    case "ArrowLeft":
+      moveLeft();
+      break;
+    case "ArrowRight":
+      moveRight();
+      break;
+    case "s":
+    case "S":
+      increaseBallVelocity(0.1);
+      break;
+    case " ":
+      restartGame();
+    default:
+      break;
   }
-  if (event.key === " ") { restartGame(); }
 }
 
 function updatePosition() {
@@ -77,6 +90,12 @@ function renderScore() {
   renderText(`Score ${score}`, position);
 }
 
+function increaseBallVelocity(factor = 0.1) {
+  ballVelocity = {
+    x : ballVelocity.x * (1 + factor),
+    y : ballVelocity.y * (1 + factor)
+  }
+}
 
 function renderText(message, position = { x: (canvas.width / 2), y: (canvas.height / 2) }) {
   ctx.font = "48px Roboto";
@@ -113,6 +132,7 @@ function checkCollisionWithPlayer() {
   ) {
     ballVelocity.y = Math.min(ballVelocity.y, 20) * -1;
     score += 1;
+    increaseBallVelocity(0.05);
   }
 }
 
@@ -131,8 +151,8 @@ function renderBall() {
 }
 
 function renderPlayer() {
-  //updatePosition();
-  //boundaryCheck();
+  updatePosition();
+  boundaryCheck();
   drawRectange("red", playerPosition, sizeOfElement);
 }
 
