@@ -1,0 +1,10 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevents scrollbars from appearing during resizing */
+}
+
+/* If you gave your canvas an ID, you can use #drawingCanvas instead */
+canvas {
+    display: block; /* Changes it from 'inline' to 'block', removing the bottom gap */
+}
