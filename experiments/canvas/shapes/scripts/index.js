@@ -57,6 +57,13 @@
      ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
+  function drawArcTo() {
+    ctx.beginPath();
+    ctx.moveTo(200,200);
+    ctx.arcTo(0,0, 200, 0, 100);
+    ctx.fill();
+  }
+
   function draw() {
     clearPage();
     drawCircle(400, 425);
