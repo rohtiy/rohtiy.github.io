@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-
 :root {
     --width: 720px;
     --font-main: 'Roboto Mono', monospace;
@@ -111,4 +110,8 @@ img {
 
 p {
    text-align: justify;
+}
+
+canvas {
+    border: 2px dashed;
 }
