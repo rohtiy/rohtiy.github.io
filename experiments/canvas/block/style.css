@@ -1,0 +1,4 @@
+#drawingCanvas {
+    width:  calc((vw/vh)*50vh);
+    height: calc(50vh);
+}
