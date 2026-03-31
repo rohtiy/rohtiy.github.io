@@ -26,6 +26,14 @@ function getContext() {
     return ctx;
 }
 
+function toggleFullScreen() {
+    if (!document?.fullscreenElement) {
+        canvas.requestFullscreen();
+    } else {
+        document.exitFullscreen?.();
+    }
+}
+
 function clearScreen() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
@@ -100,6 +108,27 @@ function addScreenResizeListner() {
     window.addEventListener("resize", onScreenResize);
 }
 
+function addKeyListener() {
+    window.addEventListener("keydown", onKeyDown);
+}
+
+function onKeyDown(event){
+    switch (event.key) {
+        case "F":
+        case "f":
+            toggleFullScreen();         
+            break;
+
+        case "C":
+        case "c":
+            clearScreen();
+            break;
+
+        default:
+            break;
+    }
+}
+
 function addClickListner() {
     let overlay = document.getElementById("overlay");
     overlay.addEventListener("click", onOverlayClick);
@@ -138,6 +167,13 @@ function initialCode() {
     clearScreen();
     addScreenResizeListner();
     addClickListner();
+    addKeyListener();
+    draw();
+    animate();
+}
+
+function restartGame() {
+    clearScreen();
     draw();
     animate();
 }
