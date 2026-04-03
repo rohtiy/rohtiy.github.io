@@ -1,3 +1,3 @@
 window.APP_CONFIG = {
-    APP_URL : "https://service.rohtiy.in"
+    APP_URL: "https://service.rohtiy.in"
 }
