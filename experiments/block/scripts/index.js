@@ -30,9 +30,9 @@ function boundaryCheck() {
 }
 
 function restartGame() {
-  if(isGameOver) {
+  if (isGameOver) {
     isGameOver = false;
-    ballVelocity = { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) };      
+    ballVelocity = { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) };
     animate();
   }
 }
@@ -42,8 +42,8 @@ function onClickListner() {
 }
 
 function moveLeft() {
-   playerPosition.x = playerPosition.x - 60;
-   velocity.x = 0;
+  playerPosition.x = playerPosition.x - 60;
+  velocity.x = 0;
 }
 
 function moveRight() {
@@ -92,8 +92,8 @@ function renderScore() {
 
 function increaseBallVelocity(factor = 0.1) {
   ballVelocity = {
-    x : ballVelocity.x * (1 + factor),
-    y : ballVelocity.y * (1 + factor)
+    x: ballVelocity.x * (1 + factor),
+    y: ballVelocity.y * (1 + factor)
   }
 }
 
@@ -113,7 +113,7 @@ function showGameOver() {
 
 
 function checkGameAreaBoundry() {
-   if (ballPosition.x >= boundries.end.x - ballSize.width || ballPosition.x <= boundries.start.x) {
+  if (ballPosition.x >= boundries.end.x - ballSize.width || ballPosition.x <= boundries.start.x) {
     ballVelocity.x = ballVelocity.x * -1;
   }
   if (ballPosition.y <= boundries.start.y) {

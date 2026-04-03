@@ -9,7 +9,7 @@ document.addEventListener('load', () => {
     let petSpeed = 1;
 
     document.appendChild(pet);
-
+    
     function startFollow(pet) {
         pet.top += petSpeed;
         pet.right += petSpeed;
