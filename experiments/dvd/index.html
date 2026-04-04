@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canvas DVD</title>
-    <script src="/experiments/dvd/scripts/index.js" defer></script>
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/experiments/style.css">
+    <script type="module" src="/experiments/dvd/scripts/index.js" defer></script>
+    <link rel="stylesheet" href="/styles/full-screen.css">
+    <link rel="stylesheet" href="/experiments/dvd/styles.css">
     <script src="/scripts/config.js"></script>
     <script type="module" src="/scripts/api-calls/index.js" defer></script>
     <link rel="icon" type="image/png" href="/public/favicon-96x96.png" sizes="96x96" />
@@ -18,13 +18,10 @@
 </head>
 
 <body>
-    <header>
-        <h1>Canvas DVD</h1>
-        <a href="/">Home</a>
-    </header>
     <canvas id="gamePlace" width="640px" height="480px">
         This will show the game in the application.
     </canvas>
+    <audio id="musicAudio" src="/public/assets/coin-collision-2.mp3"></audio>
 </body>
 
 </html>
