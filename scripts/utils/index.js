@@ -1,6 +1,6 @@
-export function toggleFullScreen() {
+export function toggleFullScreen(element) {
     if (!document?.fullscreenElement) {
-        canvas.requestFullscreen();
+        element.requestFullscreen();
     } else {
         document.exitFullscreen?.();
     }
