@@ -21,7 +21,7 @@ class MyCanvas {
 
     fillScreen = (color = canvasDefault.fillStyle) => {
         this.ctx.fillStyle = color;
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     drawRectangle = (color = "blue", position = { x: 0, y: 0 }, size = { width: 200, height: 50 }) => {
