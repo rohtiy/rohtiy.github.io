@@ -4,10 +4,7 @@ const canvasInstance = new MyCanvas({ context: '2d', size: { width: window.inner
 new KeyListener({ event: 'keydown', element: canvasInstance.canvas });
 
 new WindowResize({
-    callback: () => {
-        canvasInstance.canvas.width = window.innerWidth;
-        canvasInstance.canvas.height = window.innerHeight
-    }
+    callback: () => { setup(); }
 });
 
 
@@ -45,13 +42,6 @@ function drawParticles(number, colour) {
     }
 }
 
-function animate() {
-    canvasInstance.fillScreen();
-    drawParticles(500, 'grey');
-    requestAnimationFrame(animate);
-}
-
-
 function getRandomPositionOnCanvas() {
     return {
         x: Math.random() * canvasInstance.canvas.width,
@@ -87,8 +77,11 @@ function initialParticleSetup() {
 }
 
 function setup() {
+    canvasInstance.canvas.width = window.innerWidth;
+    canvasInstance.canvas.height = window.innerHeight;
+    canvasInstance.fillScreen('black');
     initialParticleSetup();
-    getNextFrame();
 }
 
 setup();
+getNextFrame();
