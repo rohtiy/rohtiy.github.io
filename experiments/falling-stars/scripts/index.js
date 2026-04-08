@@ -1,7 +1,13 @@
 import { WindowResize, KeyListener, MyCanvas } from "../../../scripts/index.js";
+import { getRandomPositionOnCanvas } from "../../../scripts/utils/index.js";
 
 const canvasInstance = new MyCanvas({ context: '2d', size: { width: window.innerWidth, height: window.innerHeight } });
 new KeyListener({ event: 'keydown', element: canvasInstance.canvas });
+
+let particleColor = 'white';
+let backgroundColor = 'black';
+
+canvasInstance.canvas.style.background = backgroundColor;
 
 new WindowResize({
     callback: () => { setup(); }
@@ -10,21 +16,21 @@ new WindowResize({
 
 const initialParticles = {
     layerOne: {
-        color: 'white',
+        color: particleColor,
         particles: [],
         count: 100,
         radius: 3,
         speed: 8,
     },
     layerTwo: {
-        color: 'white',
+        color: particleColor,
         particles: [],
         count: 100,
         radius: 2,
         speed: 5,
     },
     layerThree: {
-        color: 'white',
+        color: particleColor,
         particles: [],
         count: 100,
         radius: 1,
@@ -32,26 +38,9 @@ const initialParticles = {
     }
 }
 
-function drawParticles(number, colour) {
-    for (let i = 0; i < number; i++) {
-        let center = {
-            x: Math.random() * canvasInstance.canvas.width,
-            y: Math.random() * canvasInstance.canvas.height
-        }
-        canvasInstance.drawCircle(colour, center, 2);
-    }
-}
-
-function getRandomPositionOnCanvas() {
-    return {
-        x: Math.random() * canvasInstance.canvas.width,
-        y: Math.random() * canvasInstance.canvas.height
-    }
-}
-
 
 function getNextFrame() {
-    canvasInstance.fillScreen('black');
+    canvasInstance.clearScreen();
     for (let layerKey in initialParticles) {
         const { particles, count, radius, speed, color } = initialParticles[layerKey];
         for (let i = 0; i < count; i++) {
@@ -69,8 +58,9 @@ function getNextFrame() {
 function initialParticleSetup() {
     for (let layerKey in initialParticles) {
         const { particles, count } = initialParticles[layerKey];
+        particles.length = 0;
         for (let i = 0; i < count; i++) {
-            let particle = getRandomPositionOnCanvas();
+            let particle = getRandomPositionOnCanvas(canvasInstance.canvas);
             particles.push(particle);
         }
     }
@@ -79,7 +69,7 @@ function initialParticleSetup() {
 function setup() {
     canvasInstance.canvas.width = window.innerWidth;
     canvasInstance.canvas.height = window.innerHeight;
-    canvasInstance.fillScreen('black');
+    canvasInstance.clearScreen();
     initialParticleSetup();
 }
 
