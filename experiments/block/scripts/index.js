@@ -11,10 +11,10 @@ let velocity = { x: 10 };
 let textOffSet = { x: 200, y: -100 };
 let sizeOfElement = { width: 200, height: 50 };
 let score = 0;
-let boundries = { start: { x: 0, y: 0 }, end: { x: (canvas.width), y: (canvas.height) } };
+let boundaries = { start: { x: 0, y: 0 }, end: { x: (canvas.width), y: (canvas.height) } };
 let isGameOver = false;
 
-function drawRectange(color = "blue", position = { x: 0, y: 0 }, size = { width: 200, height: 50 }) {
+function drawRectangle(color = "blue", position = { x: 0, y: 0 }, size = { width: 200, height: 50 }) {
   ctx.fillStyle = color;
   ctx.fillRect(position.x, position.y, size.width, size.height);
 }
@@ -24,7 +24,7 @@ function clearPage() {
 }
 
 function boundaryCheck() {
-  if (playerPosition.x >= boundries.end.x || playerPosition.x <= boundries.start.x) {
+  if (playerPosition.x >= boundaries.end.x || playerPosition.x <= boundaries.start.x) {
     velocity.x = velocity.x * -1;
   }
 }
@@ -37,7 +37,7 @@ function restartGame() {
   }
 }
 
-function onClickListner() {
+function onClickListener() {
   restartGame();
 }
 
@@ -84,8 +84,8 @@ function createGameBlocks() {
 
 function renderScore() {
   let position = {
-    x: boundries.end.x - textOffSet.x,
-    y: boundries.start.y - textOffSet.y
+    x: boundaries.end.x - textOffSet.x,
+    y: boundaries.start.y - textOffSet.y
   }
   renderText(`Score ${score}`, position);
 }
@@ -112,14 +112,14 @@ function showGameOver() {
 }
 
 
-function checkGameAreaBoundry() {
-  if (ballPosition.x >= boundries.end.x - ballSize.width || ballPosition.x <= boundries.start.x) {
+function checkGameAreaBoundary() {
+  if (ballPosition.x >= boundaries.end.x - ballSize.width || ballPosition.x <= boundaries.start.x) {
     ballVelocity.x = ballVelocity.x * -1;
   }
-  if (ballPosition.y <= boundries.start.y) {
+  if (ballPosition.y <= boundaries.start.y) {
     ballVelocity.y = ballVelocity.y * -1;
   }
-  if (ballPosition.y >= boundries.end.y) {
+  if (ballPosition.y >= boundaries.end.y) {
     //ballVelocity.y = ballVelocity.y * -1;
     return gameOver();
   }
@@ -136,8 +136,8 @@ function checkCollisionWithPlayer() {
   }
 }
 
-function handleBallBoundries() {
-  checkGameAreaBoundry();
+function handleBallBoundaries() {
+  checkGameAreaBoundary();
   checkCollisionWithPlayer();
 }
 
@@ -146,14 +146,14 @@ function renderBall() {
     x: ballPosition.x + ballVelocity.x,
     y: ballPosition.y + ballVelocity.y,
   }
-  drawRectange("green", ballPosition, ballSize);
-  handleBallBoundries();
+  drawRectangle("green", ballPosition, ballSize);
+  handleBallBoundaries();
 }
 
 function renderPlayer() {
   updatePosition();
   boundaryCheck();
-  drawRectange("red", playerPosition, sizeOfElement);
+  drawRectangle("red", playerPosition, sizeOfElement);
 }
 
 function animate() {
@@ -172,7 +172,7 @@ function animate() {
 function initialCode() {
   animate();
   document.addEventListener("keydown", onKeyPressUpdate);
-  addEventListener("click", onClickListner);
+  addEventListener("click", onClickListener);
   handleClick();
 }
 
