@@ -35,6 +35,10 @@ class MyCanvas {
         this.ctx.arc(center.x, center.y, radius, Math.PI * 2, false);
         this.ctx.fill();
     }
+
+    fillText = (text, position, size = 2) => {
+        this.ctx.fillText(text, position.x, position.y, size);
+    }
 }
 
 export {
