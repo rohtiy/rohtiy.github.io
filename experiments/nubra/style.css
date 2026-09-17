@@ -1,5 +1,5 @@
 :root {
-    --theme-bg-image: url('/assets/night-background.jpeg');
+    --theme-bg-image: url('/public/assets/night-background.jpeg');
 }
 
 html,
