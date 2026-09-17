@@ -1,0 +1,44 @@
+:root {
+    --theme-bg-image: url('/assets/night-background.jpeg');
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+}
+
+canvas {
+    display: block;
+    image-rendering: pixelated;
+    background-image: var(--theme-bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    z-index: -1;
+}
+
+h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+div {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+}
