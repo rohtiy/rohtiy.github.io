@@ -1,5 +1,3 @@
-
-
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function getAndDisplayMessage() {
@@ -7,7 +5,7 @@ async function getAndDisplayMessage() {
 
     const params = { method: 'GET' };
 
-    await delay(5000);
+    await delay(10000);
 
     let finalResponse;
     try {
@@ -82,4 +80,4 @@ async function getAndDisplayMessage() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => { getAndDisplayMessage(); });
+//document.addEventListener('DOMContentLoaded', () => { getAndDisplayMessage(); });

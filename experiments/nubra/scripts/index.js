@@ -1,4 +1,18 @@
-import { WindowResize, KeyListener, MyCanvas } from "../../../scripts/index.js";
+import { WindowResize, KeyListener, MyCanvas, placeInteractiveButton, removeElement } from "../../../scripts/index.js";
+const controller = new AbortController();
+const { signal } = controller;
+const audioContext = new AudioContext();
+const audioElement = document.getElementById("musicAudio"); // why did get element by tag name did not work;
+const source = audioContext.createMediaElementSource(audioElement);
+source.connect(audioContext.destination);
+
+function playAudio() {
+    if (audioContext.state === "suspended") {
+        audioContext.resume();
+    }
+    audioElement.currentTime = 0.4;
+    audioElement.play();
+}
 
 const canvasInstance = new MyCanvas({ context: '2d', size: { width: window.innerWidth, height: window.innerHeight } });
 new KeyListener({ event: 'keydown', element: canvasInstance.canvas });
@@ -72,6 +86,7 @@ function initialParticleSetup() {
 }
 
 function setup() {
+    playAudio();
     canvasInstance.canvas.width = window.innerWidth;
     canvasInstance.canvas.height = window.innerHeight;
     canvasInstance.clearScreen();
@@ -82,5 +97,13 @@ function setup() {
 const meteors = 1;
 const meteorMap = {};
 
-setup();
-getNextFrame();
+placeInteractiveButton({
+    id: 'startButton',
+    label: 'Start',
+    onClick: () => {
+        removeElement({ id: 'startButton', controller });
+        setup();
+        getNextFrame();
+        getAndDisplayMessage();
+    }, options: { signal }
+});
