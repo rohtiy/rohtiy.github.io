@@ -24,12 +24,24 @@ canvas {
 }
 
 h1 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 div {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+@media (max-width:400px) {
+    h1 {
+        font-size: large;
+    }
+
+    div {
+        font-size: smaller;
+    }
+}
+
+
 
 .no-scrollbar {
     -ms-overflow-style: none;
