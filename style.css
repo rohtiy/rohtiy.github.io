@@ -7,13 +7,13 @@
     --font-main: 'Noto Sans Mono', monospace;
     --font-secondary: 'Noto Sans Mono', monospace;
     --font-scale: .9em;
-    --background-color: #fff;
-    --heading-color: #232333;
-    --text-color: #232333;
-    --link-color: #232333;
-    --visited-color: #232333;
+    --background-color: #181b2b;
+    --heading-color: #1568d5;
+    --text-color: #a3a3a3;
+    --link-color: #9797e8;
+    --visited-color: #808099;
     --main-color: #ff0000;
-    --code-background-color: #f2f2f2;
+    --code-background-color: #160a0a;
     --code-color: #222;
     --blockquote-color: #222;
 }
@@ -116,4 +116,5 @@ p {
 
 canvas {
     border: 2px dashed;
+    background-color: #160a0a;
 }

@@ -8,4 +8,5 @@ body {
 canvas {
     display: block;
     image-rendering: pixelated;
+    background-color: #160a0a;
 }
