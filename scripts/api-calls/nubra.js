@@ -1,24 +1,21 @@
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function getAndDisplayMessage() {
-    const url = window.APP_CONFIG.APP_URL + "/nubra";
+    const path = "/nubra";
+    const url = window.APP_CONFIG.APP_URL + path;
+    const fallback =  window.APP_CONFIG.FALLBACK_URL + path;
 
-    const params = { method: 'GET' };
-
-    await delay(10000);
-
-    let finalResponse;
-    try {
-        let response = await fetch(url, params);
-        finalResponse = await response.json();
-    } catch (error) {
-        console.error("Error fetching message:", error);
-        return;
-    }
+    let finalResponse = await fetchMessage(url);
 
     if (!finalResponse?.title) {
+        finalResponse = await fetchMessage(fallback);
+    }
+
+    if(!finalResponse?.title){
         return;
     }
+
+    await delay(10000);
 
     document.title = finalResponse.title;
 
@@ -78,6 +75,18 @@ async function getAndDisplayMessage() {
         title.style.opacity = '1';
         messageDiv.style.opacity = '1';
     });
+}
+
+async function fetchMessage(url) {
+    const params = { method: 'GET' };
+    try {
+        let response = await fetch(url, params);
+        finalResponse = await response.json();
+        return finalResponse;
+    } catch (error) {
+        console.error("Error fetching message:", error);
+        return {};
+    }
 }
 
 //document.addEventListener('DOMContentLoaded', () => { getAndDisplayMessage(); });
